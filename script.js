@@ -65,9 +65,15 @@ function answer(selection) {
     console.log('SelectedQuestionNumber is ', SelectedQuestionNumber);
     console.log('Current question is ', question.right_answer);
 
+    let idOfRightAnswer = /* `answer_2` */ `answer_${question.right_answer}`;
+
     if (SelectedQuestionNumber == question.right_answer) {
         console.log('Wow! Richtige Antwort!');
+        document.getElementById(selection).parentNode.classList.add('bg-success');
     } else {
-        console.log('Falsche Antwort... Probiere es noch ein Mal!')
+/*         console.log('Falsche Antwort... Probiere es noch ein Mal!'); */
+        document.getElementById(selection).parentNode.classList.add('bg-danger');
+        document.getElementById(idOfRightAnswer).parentNode.classList.add('bg-success');
+
     }
 }
