@@ -31,3 +31,11 @@ background-color: rgba(0, 0, 0, 0.05);
 .bg-danger {
     color: white !important;
 }
+
+.width-100 {
+    width: 100%;
+}
+
+.text-center {
+    text-align: center;
+}
