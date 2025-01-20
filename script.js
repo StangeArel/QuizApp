@@ -52,37 +52,49 @@ function init() {
 }
 
 function showQuestion() {
-    if (currentQuestion >= questions.length) {
-        document.getElementById('endScreen').style = "";
-        document.getElementById('questionBody').style = "display: none";
-        document.getElementById('amountOfQuestions').innerHTML = currentQuestion;  //questions.length
-        document.getElementById('amountOfRightQuestions').innerHTML = rightQuestions;  // Ergebnis anzeigen
-        document.getElementById('headerImage').src = './img/pokal.png';
+    if (gameIsOver()) {
+        showEndScreen();
     } else {
-        let percent = (currentQuestion + 1) / questions.length;
-        percent = Math.round(percent * 100);
-        document.getElementById('progress-bar').innerHTML = `${percent} %`; // percent + '%'
-        document.getElementById('progress-bar').style = `width: ${percent}%`; // percent + '%'
-
-
-        console.log('Fortschritt', percent);
-        let question = questions[currentQuestion]; // let question = questions[0]
-        /*     document.getElementById('nextButton').disabled = true; // Button deaktivieren */
-        document.getElementById("this-questions").innerHTML = currentQuestion + 1;
-        document.getElementById('questionText').innerHTML = question['question']; // question.question
-        document.getElementById('answer_1').innerHTML = question['question_1'];   // question.question_1
-        document.getElementById('answer_2').innerHTML = question['question_2'];
-        document.getElementById('answer_3').innerHTML = question['question_3'];
-        document.getElementById('answer_4').innerHTML = question['question_4'];
+        updateProgressBar();
+        updateToNextQuestion();
     }
+}
+
+function gameIsOver() {
+    return currentQuestion >= questions.length
+}
+function showEndScreen() {
+    document.getElementById('endScreen').style = "";
+    document.getElementById('questionBody').style = "display: none";
+    document.getElementById('amountOfQuestions').innerHTML = currentQuestion;  //questions.length
+    document.getElementById('amountOfRightQuestions').innerHTML = rightQuestions;  // Ergebnis anzeigen
+    document.getElementById('headerImage').src = './img/pokal.png';
+}
+
+function updateToNextQuestion() {
+    let question = questions[currentQuestion]; // let question = questions[0]
+    /*     document.getElementById('nextButton').disabled = true; // Button deaktivieren */
+    document.getElementById("this-questions").innerHTML = currentQuestion + 1;
+    document.getElementById('questionText').innerHTML = question['question']; // question.question
+    document.getElementById('answer_1').innerHTML = question['question_1'];   // question.question_1
+    document.getElementById('answer_2').innerHTML = question['question_2'];
+    document.getElementById('answer_3').innerHTML = question['question_3'];
+    document.getElementById('answer_4').innerHTML = question['question_4'];
+}
+
+function updateProgressBar() {
+    let percent = (currentQuestion + 1) / questions.length;
+    percent = Math.round(percent * 100);
+    document.getElementById('progress-bar').innerHTML = `${percent} %`; // percent + '%'
+    document.getElementById('progress-bar').style = `width: ${percent}%`; // percent + '%'
 }
 
 function answer(selection) {
     let question = questions[currentQuestion]; // let question = questions[0]
-    let SelectedQuestionNumber = selection.slice(-1);
+    let selectedQuestionNumber = selection.slice(-1);
     let idOfRightAnswer = /* `answer_2` */ `answer_${question.right_answer}`;
 
-    if (SelectedQuestionNumber == question.right_answer) {
+    if (rightAnswerSelected(selectedQuestionNumber)) {
         document.getElementById(selection).parentNode.classList.add('bg-success');
         audioFail.play();
         rightQuestions++; //  Ergebnis aufzählen
@@ -94,6 +106,10 @@ function answer(selection) {
     document.getElementById('nextButton').disabled = false;
 }
 
+function rightAnswerSelected(selectedQuestionNumber) { // Platzhalter kann man anders benennen
+    return selectedQuestionNumber == question.right_answer
+}
+
 function nextQuestion() {
     currentQuestion++;
     document.getElementById('nextButton').disabled = true;
@@ -102,7 +118,7 @@ function nextQuestion() {
 }
 
 function resetAnswerButtons() {
-    document.getElementById('answer_1').parentNode.classList.remove('bg-danger');
+    document.getElementById('answer_1').parentNode.classList.remove('bg-danger'); // später kommt vor - Schleife
     document.getElementById('answer_1').parentNode.classList.remove('bg-success');
     document.getElementById('answer_2').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_2').parentNode.classList.remove('bg-success');
