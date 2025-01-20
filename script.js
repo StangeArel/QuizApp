@@ -61,6 +61,13 @@ function showQuestion() {
 
 
     } else {
+        let percent = (currentQuestion + 1) / questions.length;
+        percent = Math.round(percent * 100);
+        document.getElementById('progress-bar').innerHTML =`${percent} %`; // percent + '%'
+        document.getElementById('progress-bar').style = `width: ${percent}%`; // percent + '%'
+
+
+        console.log('Fortschritt', percent);
         let question = questions[currentQuestion]; // let question = questions[0]
         /*     document.getElementById('nextButton').disabled = true; // Button deaktivieren */
         document.getElementById("this-questions").innerHTML = currentQuestion + 1;
