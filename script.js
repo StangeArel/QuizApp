@@ -55,6 +55,11 @@ function showQuestion() {
         document.getElementById('questionBody').style = "display: none";
         document.getElementById('amountOfQuestions').innerHTML = currentQuestion;  //questions.length
         document.getElementById('amountOfRightQuestions').innerHTML = rightQuestions;  // Ergebnis anzeigen
+
+        document.getElementById('headerImage').src = './img/pokal.png';
+
+
+
     } else {
         let question = questions[currentQuestion]; // let question = questions[0]
         /*     document.getElementById('nextButton').disabled = true; // Button deaktivieren */

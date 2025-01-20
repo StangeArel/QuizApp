@@ -39,3 +39,8 @@ background-color: rgba(0, 0, 0, 0.05);
 .text-center {
     text-align: center;
 }
+
+.finalHeadline {
+    font-size: 38px;
+    margin-bottom: 32px;
+}
