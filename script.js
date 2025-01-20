@@ -55,15 +55,11 @@ function showQuestion() {
         document.getElementById('questionBody').style = "display: none";
         document.getElementById('amountOfQuestions').innerHTML = currentQuestion;  //questions.length
         document.getElementById('amountOfRightQuestions').innerHTML = rightQuestions;  // Ergebnis anzeigen
-
         document.getElementById('headerImage').src = './img/pokal.png';
-
-
-
     } else {
         let percent = (currentQuestion + 1) / questions.length;
         percent = Math.round(percent * 100);
-        document.getElementById('progress-bar').innerHTML =`${percent} %`; // percent + '%'
+        document.getElementById('progress-bar').innerHTML = `${percent} %`; // percent + '%'
         document.getElementById('progress-bar').style = `width: ${percent}%`; // percent + '%'
 
 
@@ -110,4 +106,13 @@ function resetAnswerButtons() {
     document.getElementById('answer_3').parentNode.classList.remove('bg-success');
     document.getElementById('answer_4').parentNode.classList.remove('bg-danger');
     document.getElementById('answer_4').parentNode.classList.remove('bg-success');
+}
+
+function restartGame() {
+    document.getElementById('headerImage').src = './img/pencil.jpg';
+    document.getElementById('questionBody').style = ""; // questionBody wieder anzeigen
+    document.getElementById('endScreen').style = "display: none"; // endScreen ausblenden
+    currentQuestion = 0;
+    rightQuestions = 0;
+    init();
 }
